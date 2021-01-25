@@ -1,10 +1,8 @@
 # 1 problem - 3 languages
-This repository is used to demonstrate how a problem can be solved in 3 different languages such as python, javascript and clojure.
-
-Programming challenges utilised for this demonstration are taken from [Advent of Code 2020](https://adventofcode.com/2020/day/1).
+This repository contains solutions to challenges of [Advent of Code 2020](https://adventofcode.com/2020/day/1), written in 3 languages: Python, Javascript and Clojure. The reason for the existence of this repo is to demonstrate how my thinking process and coding style has significantly changed after moving away from object-oriented programming to functional programming for almost a year.
 
 ## How to run code in this project
-Scripts are stored in 3 different folders: python, javascript and clojure.
+Scripts are stored in 3 different folders: Python, Javascript and Clojure.
 
 ### To run Python code
 You will need python 3 installed on your machine.
@@ -21,10 +19,10 @@ node filename.js
 ```
 
 ### To run Clojure files
-You will need to install [Leiningen](https://leiningen.org/), then create a leinigen project and copy the source scripts in *clojure* directory to the *src* directory of the leiningen project.
+You will need to install [Leiningen](https://leiningen.org/), then create a leiningen project and copy the source scripts in *clojure* directory to the *src* directory of the leiningen project.
 
 #### Installation of Leiningen on Linux
-```shel
+```shell
 $ sudo apt update
 $ sudo apt install leiningen
 ```
