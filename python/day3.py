@@ -13,10 +13,8 @@ def is_a_tree(area, coordinate):
     return "#" == position
 
 def make_a_move(coordinate=[0,0], slope=[3,1]):
-    x = coordinate[0]
-    y = coordinate[1]
-    step_right = slope[0]
-    step_down = slope[1]
+    x, y = coordinate
+    step_right, step_down = slope
 
     return [x+step_right, y+step_down]
 
@@ -25,29 +23,34 @@ def expand_map(current_area, adding_area):
            "Adding area doesn't have the same length as of current area"
 
     new_area = list(map(lambda a, b: a + b, current_area, adding_area))
+    
     return new_area
 
-def should_expand_map(current_area, coordinate):
+def should_expand_map(current_area, coordinate, slope=[1,1]):
     current_index = coordinate[0]
     max_index     = len(current_area[0]) - 1
-    right_steps   = coordinate[0]
+    right_steps   = slope[0]
 
     return ((max_index - current_index) < right_steps)
 
 # PART 1
 def count_trees_on_path(area, slope=[3,1]):
     position     = [0,0]
-    count_trees  = 0
     current_area = area
+    
+    if is_a_tree(current_area, position):
+        count_trees = 1
+    else:
+        count_trees = 0
 
     while position[1] < (len(area) - slope[1]):
-        if is_a_tree(current_area, position):
-            count_trees += 1
-
-        if should_expand_map(current_area, position):
+        if should_expand_map(current_area, position, slope):
             current_area = expand_map(current_area, area)
 
         position = make_a_move(position, slope)
+
+        if is_a_tree(current_area, position):
+            count_trees += 1
 
     return count_trees
 

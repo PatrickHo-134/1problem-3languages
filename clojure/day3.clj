@@ -1,7 +1,7 @@
 (ns aoc-2020.day3
   (:require [clojure.string :as s]))
 
-(def my-map (-> (slurp "D:/Program_files/Projects/hacker_rank/1problem-3languages/day3_input.txt")
+(def my-map (-> (slurp "/home/patrick/Documents/projects/1problem-3languages/day3_input.txt")
                 (s/split #"\n")
                 (#(map (fn [s] (s/replace s "\r" "")) %))))
 
@@ -11,8 +11,7 @@
   (map str current-area adding-area))
 
 (defn is-a-tree? [area-map coordinate]
-  (let [x (first coordinate)
-        y (second coordinate)
+  (let [[x y]    coordinate
         position (-> area-map
                      (nth y)
                      (nth x)
@@ -20,8 +19,7 @@
     (= position "#")))
 
 (defn make-a-move! [coordinate slope]
-  (let [step-right (first slope)
-        step-down  (second slope)
+  (let [[step-right step-down]  slope
         new-x (+ (first coordinate) step-right)
         new-y (+ (second coordinate) step-down)]
     [new-x new-y]))
@@ -36,7 +34,9 @@
 (defn count-trees-on-path [area slope]
   (let [coordinate    (atom [0 0])
         current-area  (atom area)
-        count-tree    (atom 0)]
+        count-tree    (if (is-a-tree? @current-area @coordinate)
+                        (atom 1)
+                        (atom 0))]
     (while (< (second @coordinate) (dec (count @current-area)))
       (when (expand-map? @current-area @coordinate slope)
         (swap! current-area expand-map! area))
@@ -57,4 +57,3 @@
      (map #(count-trees-on-path my-map %))
      (apply *))
 ;; => 3316272960
-
