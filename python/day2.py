@@ -61,5 +61,3 @@ def check_password2(entry):
 
 correct_password = list(filter(check_password2, processed_input))
 print(len(correct_password))
-
-print("asdfh"[10])
